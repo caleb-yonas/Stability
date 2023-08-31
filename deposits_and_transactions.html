@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta information for proper encoding and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the webpage -->
+    <title>Deposits and Transactions</title>
+
+    <link rel="stylesheet" href="styles.css"> <!-- External stylesheet -->
+</head>
+
+<body>
+
+    <!-- Tab links -->
+    <div class="tab">
+        <!-- Tab buttons (now anchor tags) to navigate between pages -->
+        <a href="overview.html" class="tablinks">Overview</a>
+        <a href="deposits_and_transactions.html" class="tablinks active">Deposits and Transactions</a>
+        <a href="budgeting.html" class="tablinks">Budgeting</a>
+    </div>
+
+    <!-- Your original content -->
+    <!-- The container for the date and deposit input sections, side by side -->
+    <div class="container">
+        <!-- Date selection section -->
+        <div>
+            <h2>Select a date:</h2>
+            <!-- Input for date selection -->
+            <input type="date" id="datePicker">
+            <!-- Button to trigger date display -->
+            <button onclick="displayDate()">Submit</button>
+            <!-- Paragraph to display the selected date -->
+            <p id="selectedDate"></p>
+        </div>
+
+        <!-- Deposit input section -->
+        <div>
+            <h2>Deposit Section:</h2>
+            <!-- Label and input for deposit amount -->
+            <label for="depositAmount">Amount:</label>
+            <input type="text" id="depositAmount" placeholder="Enter deposit amount">
+            <!-- Button to trigger deposit storage -->
+            <button onclick="storeDeposit()">Add Deposit</button>
+        </div>
+    </div>
+
+    <!-- The container for displaying stored deposits -->
+    <div class="container">
+        <!-- Heading for the deposits table -->
+        <h3>Deposits:</h3>
+        <!-- Table to display deposits -->
+        <table border="1" id="depositTable">
+            <thead>
+                <tr>
+                    <!-- Table headers for date and amount columns -->
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <!-- Table body to populate with stored deposits -->
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+
+</html>
