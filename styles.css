@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.tab {
+    background-color: #1E2F97;
+    padding: 10px 0; /* You can adjust this value to give it more or less padding */
+}
+
+
+.tablinks {
+    padding: 10px 15px; /* Adjust for desired spacing */
+    color: white; /* This will make the text white for better contrast with the blue background */
+    text-decoration: none; /* To remove the underlining from the anchor links */
+    display: inline-block; /* This will allow the links to sit next to one another */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.tablinks:hover {
+    background-color: #0a1127; /* A slightly darker blue when hovering over the link */
+}
+
+
+.tablinks.active {
+    background-color: #2a5aec;
+    color: #fff;
+    transform: translateY(-1px); /* subtle push effect for active state */
+}
