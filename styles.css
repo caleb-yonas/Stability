@@ -13,25 +13,54 @@ body {
 
 .tab {
     background-color: #1E2F97;
-    padding: 10px 0; /* You can adjust this value to give it more or less padding */
+    padding: 15px; /* Equal padding on top and bottom */
+    display: flex; 
+    align-items: center;
+    justify-content: flex-end; 
 }
 
-
 .tablinks {
-    padding: 10px 15px; /* Adjust for desired spacing */
-    color: white; /* This will make the text white for better contrast with the blue background */
-    text-decoration: none; /* To remove the underlining from the anchor links */
-    display: inline-block; /* This will allow the links to sit next to one another */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px; 
+    transition: background-color 0.3s;
+}
+
+.tablinks:last-child {
+    margin-right: 20px;  /* Space from the last tab link to the right edge */
 }
 
 .tablinks:hover {
-    background-color: #0a1127; /* A slightly darker blue when hovering over the link */
+    background-color: #2a5aec;
 }
 
-
 .tablinks.active {
-    background-color: #2a5aec;
+    background-color: #0a1127;
     color: #fff;
-    transform: translateY(-1px); /* subtle push effect for active state */
+    transform: translateY(-1px);
+}
+
+.logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px; /* Adjust as needed */
+    font-weight: 600; /* Adjust as needed, this will make it a bit bolder */
+    position: absolute;
+    top: 10px; /* Adjust distance from top as needed */
+    left: 10px; /* Adjust distance from left as needed */
+    color: #FFF; /* Adjust color as needed */
+    background-color: #4361EE; /* Add a background color if you like */
+    padding: 5px 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.main-content-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; /* Optional: Added for a bit of spacing around the main content container */
+}
+
+.section {
+    flex: 1; /* Equal width for all sections */
+    margin: 0 20px; /* Some spacing between sections */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
 }
