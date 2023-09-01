@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date Picker Example</title>
+    <title>Date Picker and Deposit Example</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<h2>Select a date:</h2>
-<input type="date" id="datePicker">
+    <!-- Tab links -->
+    <div class="tab">
+        <!-- Tab buttons (now anchor tags) to navigate between pages -->
+        <a href="overview.html" class="tablinks">Overview</a>
+        <a href="deposits_and_transactions.html" class="tablinks active">Deposits and Transactions</a>
+        <a href="budgeting.html" class="tablinks">Budgeting</a>
 
-<button onclick="displayDate()">Submit</button>
+    </div>
 
-<p id="selectedDate"></p>
-
-<script src="script.js"></script>
+    <!-- Introduction or any central content you'd like to place on this page -->
+    <div class="content">
+        <h3>Welcome</h3>
+        <p>Please select a tab above to navigate to the respective content.</p>
+    </div>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+    }
+    
+    .tablinks.active {
+        /* Any special styling for active tab link */
+        font-weight: bold;
+    }
 </body>
+
 </html>
