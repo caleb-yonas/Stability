@@ -42,6 +42,13 @@ function storeDeposit() {
         const amountCell = newRow.insertCell(1);
         dateCell.textContent = dateValue;
         amountCell.textContent = depositAmount;
+
+        // Clear the date input field
+        document.getElementById('datePicker').value = '';
+
+        // Clear the deposit input field
+        document.getElementById('depositAmount').value = '';
+        
     } else {
         alert('Please enter both date and deposit amount!');
     }
