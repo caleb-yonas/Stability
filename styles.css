@@ -64,3 +64,11 @@ body {
     margin: 0 20px; /* Some spacing between sections */
     box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
 }
+
+#topRightImage {
+    margin-right: auto;
+    margin-left: 10px;  /* adjust as necessary */
+    margin-top: 10px;   /* adjust as necessary */
+    max-height: 40px;   /* adjust as necessary to control image size */
+    width: auto;       /* keeps the image aspect ratio */
+}
