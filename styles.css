@@ -72,3 +72,34 @@ body {
     max-height: 40px;   /* adjust as necessary to control image size */
     width: auto;       /* keeps the image aspect ratio */
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1200px; /* or whatever maximum width you want */
+    margin: 0 auto; /* centering the container horizontally */
+}
+
+.main-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* space between sections */
+    width: 100%;
+}
+
+.centered-section {
+    text-align: center; /* centering the text and inline elements */
+    margin-top: 20px; /* giving some space at the top */
+}
+
+.section {
+    padding: 20px;
+    border: 1px solid #e0e0e0; /* optional: to visualize the sections */
+}
