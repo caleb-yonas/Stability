@@ -20,6 +20,20 @@
     <h3>Budgeting</h3>
     <p>Content related to budgeting.</p>
 
+    <label for="budgetChoices">Select a budget category:</label>
+    <select id="budgetChoices" onchange="checkOther(this)">
+        <option value="groceries">Groceries</option>
+        <option value="utilities">Utilities</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="other">Other</option>
+    </select>
+    
+    <div id="otherInput" style="display:none;">
+        <label for="otherCategory">Specify the category:</label>
+        <input type="text" id="otherCategory">
+        <button onclick="addNewCategory()">Add</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
