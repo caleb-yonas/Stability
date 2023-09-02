@@ -53,3 +53,32 @@ function storeDeposit() {
         alert('Please enter both date and deposit amount!');
     }
 }
+
+// Function to store and display a transaction
+function storeTransaction() {
+    const transactionDescription = document.getElementById('transactionDescription').value;
+    const transactionAmount = document.getElementById('transactionAmount').value;
+    const dateValue = document.getElementById('datePicker').value;
+    
+    if (transactionDescription && transactionAmount && dateValue) {
+        const transactionTableBody = document.querySelector('#transactionTable tbody');
+        const newRow = transactionTableBody.insertRow();
+        const dateCell = newRow.insertCell(0);
+        const descriptionCell = newRow.insertCell(1);
+        const amountCell = newRow.insertCell(2);
+        
+        dateCell.textContent = dateValue;
+        descriptionCell.textContent = transactionDescription;
+        amountCell.textContent = transactionAmount;
+
+        // Clear the date input field
+        document.getElementById('datePicker').value = '';
+
+        // Clear the transaction description and amount input fields
+        document.getElementById('transactionDescription').value = '';
+        document.getElementById('transactionAmount').value = '';
+        
+    } else {
+        alert('Please enter date, transaction description, and transaction amount!');
+    }
+}
