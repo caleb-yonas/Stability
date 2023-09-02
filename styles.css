@@ -1,5 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -13,7 +17,7 @@ body {
 
 .tab {
     background-color: #1E2F97;
-    padding: 15px; /* Equal padding on top and bottom */
+    padding: 15px;
     display: flex; 
     align-items: center;
     justify-content: flex-end; 
@@ -28,7 +32,7 @@ body {
 }
 
 .tablinks:last-child {
-    margin-right: 20px;  /* Space from the last tab link to the right edge */
+    margin-right: 20px;
 }
 
 .tablinks:hover {
@@ -43,63 +47,61 @@ body {
 
 .logo {
     font-family: 'Nunito', sans-serif;
-    font-size: 24px; /* Adjust as needed */
-    font-weight: 600; /* Adjust as needed, this will make it a bit bolder */
+    font-size: 24px;
+    font-weight: 600;
     position: absolute;
-    top: 10px; /* Adjust distance from top as needed */
-    left: 10px; /* Adjust distance from left as needed */
-    color: #FFF; /* Adjust color as needed */
-    background-color: #4361EE; /* Add a background color if you like */
-    padding: 5px 10px; /* Adjust padding as needed */
-    border-radius: 5px; /* Optional: Rounded corners */
-}
-.main-content-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px; /* Optional: Added for a bit of spacing around the main content container */
-}
-
-.section {
-    flex: 1; /* Equal width for all sections */
-    margin: 0 20px; /* Some spacing between sections */
-    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
-}
-
-#topRightImage {
-    margin-right: auto;
-    margin-left: 10px;  /* adjust as necessary */
-    margin-top: 10px;   /* adjust as necessary */
-    max-height: 40px;   /* adjust as necessary to control image size */
-    width: auto;       /* keeps the image aspect ratio */
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.content-wrapper {
-    width: 100%;
-    max-width: 1200px; /* or whatever maximum width you want */
-    margin: 0 auto; /* centering the container horizontally */
+    top: 10px;
+    left: 10px;
+    color: #FFF;
+    background-color: #4361EE;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 .main-content-container {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* space between sections */
-    width: 100%;
-}
-
-.centered-section {
-    text-align: center; /* centering the text and inline elements */
-    margin-top: 20px; /* giving some space at the top */
+    gap: 20px;
+    width: 80%;  /* Reduced to 80% from 100% to make it less wide */
+    margin: 0 auto;  /* This will center the container horizontally */
+    padding: 20px;
 }
 
 .section {
     padding: 20px;
-    border: 1px solid #e0e0e0; /* optional: to visualize the sections */
+    border: 2px solid #1E2F97; 
+    flex: 1; 
+    margin: 20px 20px;  /* Adding a vertical margin to create the space */
+    box-sizing: border-box; 
+}
+
+.no-border {
+    border: none;
+}
+
+#topRightImage {
+    margin-right: auto;
+    margin-left: 10px;
+    margin-top: 10px;
+    max-height: 40px;
+    width: auto;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.centered-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+#otherInput {
+    margin-top: 10px;
 }
