@@ -81,7 +81,6 @@ function storeTransaction() {
     }
 }
 
-
 function checkOther(selectBox) {
     const otherInputDiv = document.getElementById('otherInput');
     if (selectBox.value === "other") {
@@ -91,19 +90,51 @@ function checkOther(selectBox) {
     }
 }
 
+function createBudgetBar(category) {
+    const budgetContainer = document.getElementById('budgetCategoryContainer');
+    const newCategoryDiv = document.createElement('div');
+    newCategoryDiv.className = 'category';
+    newCategoryDiv.innerHTML = `
+        <p>${category}:</p>
+        <div class="budget-bar">
+            <div class="filled-bar ${category.toLowerCase()}"></div>
+        </div>
+        <input type="number" placeholder="Set budget" class="budget-input" id="${category}Budget">
+    `;
+    budgetContainer.appendChild(newCategoryDiv);
+
+    // Add event listener to the new budget input element
+    const newBudgetInput = document.getElementById(`${category}Budget`);
+    newBudgetInput.addEventListener('input', updateBudgetBar);
+}
+
+// Function to add a new budget category
 function addNewCategory() {
     const selectBox = document.getElementById('budgetChoices');
     const otherCategoryInput = document.getElementById('otherCategory');
     const newCategory = otherCategoryInput.value.trim();
-    if (newCategory && ![...selectBox.options].some(opt => opt.value === newCategory)) {
+
+    // Check if the category already exists in the select box
+    const categoryExists = [...selectBox.options].some(opt => opt.value === newCategory);
+
+    if (newCategory && !categoryExists) {
         const newOption = document.createElement('option');
         newOption.value = newCategory;
         newOption.textContent = newCategory;
         selectBox.insertBefore(newOption, selectBox.lastChild);
+
+        // Create a new budget category bar
+        createBudgetBar(newCategory);
+
+        // Clear the input and hide the input box
+        otherCategoryInput.value = "";
+        selectBox.value = newCategory;
+        document.getElementById('otherInput').style.display = "none";
+    } else {
+        // If category already exists, select it in the dropdown
+        selectBox.value = newCategory;
+        document.getElementById('otherInput').style.display = "none";
     }
-    otherCategoryInput.value = "";
-    selectBox.value = newCategory;
-    document.getElementById('otherInput').style.display = "none";
 }
 
 // New Code
@@ -163,3 +194,61 @@ function dateConvert(dateString) {
 const inputDate = "2023-12-31";
 const correctedDate = dateConvert(inputDate);
 console.log(correctedDate);
+
+function updateBudgetBar(event) {
+    const inputValue = parseFloat(event.target.value) || 0;
+    const budgetBar = event.target.closest('.category').querySelector('.filled-bar');
+    budgetBar.style.width = inputValue + '%';
+}
+const budgetInputs = document.querySelectorAll('.budget-input');
+budgetInputs.forEach(input => {
+    input.addEventListener('input', updateBudgetBar);
+});
+
+// Initialize the budget bars for existing categories on page load
+const existingCategories = ['groceries', 'utilities', 'entertainment'];
+existingCategories.forEach(category => createBudgetBar(category));
+
+// ... Your other functions ...
+
+// Initialize the budget bars for existing categories on page load
+window.onload = () => {
+    existingCategories.forEach(category => createBudgetBar(category));
+};
+
+// Get the canvas element and create a context
+const ctx = document.getElementById('lineChart').getContext('2d');
+
+// Sample data for the line graph
+const data = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    datasets: [{
+        label: 'Amount of Money',
+        data: [100, 150, 200, 130, 180, 250], // Replace with your actual data
+        borderColor: 'rgba(75, 192, 192, 1)', // Line color
+        borderWidth: 2,
+        fill: false // No fill under the line
+    }]
+};
+
+// Create the line chart
+const lineChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Months'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Amount of Money'
+                }
+            }
+        }
+    }
+});
