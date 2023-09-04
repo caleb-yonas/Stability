@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overview</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .tab {
+            background-color: #1E2F97;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .tablinks {
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+        .tablinks.active {
+            background-color: #0a1127;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .line-chart-container {
+            width: 90%; /* Adjust the width as needed */
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,8 +52,54 @@
     <a href="budgeting.html" class="tablinks">Budgeting</a>
 </div>
 
-<h3>Overview</h3>
-<p>This is the overview tab.</p>
+<div class="content">
+    <h3>Overview</h3>
+    <p>Track your personal finances!</p>
+</div>
+
+<div class="line-chart-container">
+    <canvas id="lineChart"></canvas>
+</div>
+
+<script>
+// Sample data for the line chart
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const amounts = [500, 800, 600, 1000, 1200, 900, 1100];
+
+// Create a line chart using Chart.js
+const lineChart = new Chart(document.getElementById('lineChart'), {
+    type: 'line',
+    data: {
+        labels: months,
+        datasets: [{
+            label: 'Amount of Money',
+            data: amounts,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 255, 0.2)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Amount'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Months'
+                }
+            }
+        }
+    }
+});
+</script>
 
 </body>
 </html>
