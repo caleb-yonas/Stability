@@ -90,53 +90,6 @@ function checkOther(selectBox) {
     }
 }
 
-function createBudgetBar(category) {
-    const budgetContainer = document.getElementById('budgetCategoryContainer');
-    const newCategoryDiv = document.createElement('div');
-    newCategoryDiv.className = 'category';
-    newCategoryDiv.innerHTML = `
-        <p>${category}:</p>
-        <div class="budget-bar">
-            <div class="filled-bar ${category.toLowerCase()}"></div>
-        </div>
-        <input type="number" placeholder="Set budget" class="budget-input" id="${category}Budget">
-    `;
-    budgetContainer.appendChild(newCategoryDiv);
-
-    // Add event listener to the new budget input element
-    const newBudgetInput = document.getElementById(`${category}Budget`);
-    newBudgetInput.addEventListener('input', updateBudgetBar);
-}
-
-// Function to add a new budget category
-function addNewCategory() {
-    const selectBox = document.getElementById('budgetChoices');
-    const otherCategoryInput = document.getElementById('otherCategory');
-    const newCategory = otherCategoryInput.value.trim();
-
-    // Check if the category already exists in the select box
-    const categoryExists = [...selectBox.options].some(opt => opt.value === newCategory);
-
-    if (newCategory && !categoryExists) {
-        const newOption = document.createElement('option');
-        newOption.value = newCategory;
-        newOption.textContent = newCategory;
-        selectBox.insertBefore(newOption, selectBox.lastChild);
-
-        // Create a new budget category bar
-        createBudgetBar(newCategory);
-
-        // Clear the input and hide the input box
-        otherCategoryInput.value = "";
-        selectBox.value = newCategory;
-        document.getElementById('otherInput').style.display = "none";
-    } else {
-        // If category already exists, select it in the dropdown
-        selectBox.value = newCategory;
-        document.getElementById('otherInput').style.display = "none";
-    }
-}
-
 // New Code
 let transactions = [];
 let deposits = [];
@@ -168,60 +121,90 @@ class Payment {
 }
 
 function amountSort(list) {
-    let cat = list.map(payment => payment.getCategory())
-                   .filter((category, idx, arr) => arr.indexOf(category) === idx);
-    let amt = Array(cat.length).fill(0);
-    for (let i = 0; i < cat.length; i++) {
-        for (let payment of list) {
-            if (cat[i] === payment.getCategory()) {
-                amt[i] += payment.getAmount();
-            }
-        }
-    }
-    const result = Object.fromEntries(cat.map((category, idx) => [category, amt[idx]]));
-    console.log(result);
+    // ... Your existing amountSort function code ...
 }
 
 function dateConvert(dateString) {
-    const [year, month, day] = dateString.split('-').map(Number);
-    const correctedDate = new Date(year, month - 1, day);
-    if (correctedDate.getDate() !== day) {
-        correctedDate.setDate(0);
+    // ... Your existing dateConvert function code ...
+}
+
+// Function to update budget bar based on input
+function updateBudgetBar(category) {
+    const budgetInput = document.getElementById(`${category}Budget`);
+    const budgetValue = parseFloat(budgetInput.value) || 0;
+    const budgetBar = budgetInput.closest('.category').querySelector('.filled-bar');
+    const spentAmount = getSpentAmount(category); // Define this function to calculate the actual spent amount for each category
+    const filledWidth = (spentAmount / budgetValue) * 100;
+    budgetBar.style.width = filledWidth + '%';
+    
+    // Update the budget amount display
+    const budgetAmountSpan = document.getElementById(`${category}BudgetAmount`);
+    budgetAmountSpan.textContent = `Budget: $${budgetValue.toFixed(2)}`;
+}
+
+function getSpentAmount(category) {
+    const categoryTransactions = transactions.filter(transaction => transaction.getCategory() === category);
+    return categoryTransactions.reduce((total, transaction) => total + transaction.getAmount(), 0);
+}
+
+// Function to add a new budget category
+function addNewCategory() {
+    const selectBox = document.getElementById('budgetChoices');
+    const otherCategoryInput = document.getElementById('otherCategory');
+    const newCategory = otherCategoryInput.value.trim();
+
+    // Check if the category already exists in the select box
+    const categoryExists = [...selectBox.options].some(opt => opt.value === newCategory);
+
+    if (newCategory && !categoryExists) {
+        const newOption = document.createElement('option');
+        newOption.value = newCategory;
+        newOption.textContent = newCategory;
+        selectBox.insertBefore(newOption, selectBox.lastChild);
+
+        // Create a new budget category bar
+        createBudgetBar(newCategory);
+
+        // Clear the input and hide the input box
+        otherCategoryInput.value = "";
+        selectBox.value = newCategory;
+        document.getElementById('otherInput').style.display = "none";
+    } else {
+        // If category already exists, select it in the dropdown
+        selectBox.value = newCategory;
+        document.getElementById('otherInput').style.display = "none";
     }
-    return correctedDate;
 }
 
-const inputDate = "2023-12-31";
-const correctedDate = dateConvert(inputDate);
-console.log(correctedDate);
+// Function to create a new budget category bar
+function createBudgetBar(category) {
+    const budgetContainer = document.getElementById('budgetCategoryContainer');
+    const newCategoryDiv = document.createElement('div');
+    newCategoryDiv.className = 'category';
+    newCategoryDiv.innerHTML = `
+        <p>${category}:</p>
+        <div class="budget-bar">
+            <div class="filled-bar ${category.toLowerCase()}"></div>
+        </div>
+        <div class="budget-input-container">
+            <input type="number" placeholder="Set budget" class="budget-input" id="${category}Budget">
+            <button class="set-budget-button" onclick="updateBudgetBar('${category}')">Set</button>
+        </div>
+        <span class="budget-amount" id="${category}BudgetAmount">Budget: N/A</span>
+    `;
+    budgetContainer.appendChild(newCategoryDiv);
 
-function updateBudgetBar(event) {
-    const inputValue = parseFloat(event.target.value) || 0;
-    const budgetBar = event.target.closest('.category').querySelector('.filled-bar');
-    budgetBar.style.width = inputValue + '%';
+    // Add event listener to the new budget input element
+    const newBudgetInput = document.getElementById(`${category}Budget`);
+    newBudgetInput.addEventListener('input', updateBudgetBar);
 }
-const budgetInputs = document.querySelectorAll('.budget-input');
-budgetInputs.forEach(input => {
-    input.addEventListener('input', updateBudgetBar);
-});
-
-// Initialize the budget bars for existing categories on page load
-const existingCategories = ['groceries', 'utilities', 'entertainment'];
-existingCategories.forEach(category => createBudgetBar(category));
-
-// ... Your other functions ...
-
-// Initialize the budget bars for existing categories on page load
-window.onload = () => {
-    existingCategories.forEach(category => createBudgetBar(category));
-};
 
 // Get the canvas element and create a context
 const ctx = document.getElementById('lineChart').getContext('2d');
 
 // Sample data for the line graph
 const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [{
         label: 'Amount of Money',
         data: [100, 150, 200, 130, 180, 250], // Replace with your actual data
