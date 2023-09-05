@@ -8,7 +8,11 @@ function RegistrationPage() {
   });
 
   const [isUsernameTaken, setIsUsernameTaken] = useState(false); // State to track username availability
-
+  
+  useEffect(() => {
+    checkUsernameAvailability(); // Call this function whenever username changes
+  }, [formData.username]); // This ensures username availability is always checked
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -16,6 +20,8 @@ function RegistrationPage() {
       [name]: value,
     });
     setIsUsernameTaken(false);
+
+   
   };
   
   const checkUsernameAvailability = async () => {
@@ -55,11 +61,22 @@ function RegistrationPage() {
     const password = e.target.value;
     const error = validatePassword(password);
     setErrorMessage(error);
+    checkUsernameAvailability(formData.username);
+
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-  
+    // Check if the password is empty or blank
+    if (!formData.password.trim()) {
+      setErrorMessage('Password cannot be empty.');
+      return; // Exit the function if the password is empty
+    }
+    // Check if the username is empty or blank
+    if (!formData.username.trim()) {
+      setErrorMessage('Username cannot be empty.');
+      return; // Exit the function if the username is empty
+    }
     // Create a registration object with the username and password from the form data
     const registrationData = {
       username: formData.username,
@@ -102,7 +119,7 @@ function RegistrationPage() {
   return (
     <div>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} method='POST'>
+      <form onSubmit={handleSubmit} method="POST">
         <div>
           <label htmlFor="username">Username:</label>
           <input
@@ -113,6 +130,7 @@ function RegistrationPage() {
             onChange={handleInputChange}
           />
         </div>
+        {isUsernameTaken && <p className="error-message">Username is already taken.</p>}
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -124,7 +142,7 @@ function RegistrationPage() {
             onBlur={handlePasswordChange}
           />
         </div>
-        {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Use a CSS class for styling */}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit" disabled={isUsernameTaken || !!errorMessage}>
           Register
         </button>
@@ -132,5 +150,4 @@ function RegistrationPage() {
     </div>
   );
 }
-
 export default RegistrationPage;

@@ -35,7 +35,6 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/check-username', (req, res) => {
-  console.log("you are at da api")
   const { username } = req.body;
 
   // Check if the username already exists in the database
@@ -43,12 +42,13 @@ app.post('/api/check-username', (req, res) => {
 
   if (isUsernameTaken) {
     // Username is already taken
-    console.log("ok it reads as taken")
+
     return res.status(400).json({ message: 'Username is already taken.' });
   }
-
+  else {
   // Username is available
   res.status(200).json({ message: 'Username is available.' });
+  }
 });
 
 // Start the server
