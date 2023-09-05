@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deposits and Transactions</title>
+    <title>Overview</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Your existing styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        .tablinks {
+            font-size: 16px;
+        }
+        /* Additional styles for tables */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: rgba(42, 90, 236, 0.9); /* Set a bluish color with less saturated opacity for the table headers */
+            color: white; /* Set white text color for better contrast */
+        }
+        tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        /* Rest of your existing styles */
+    </style>
 </head>
 
 <body>
     <div class="tab">
-        <img src="stability.jpg" alt="Stability Logo" id="topRightImage">
+        <img src="stability.jpg" alt="Stability Logo" id="topRightImage" style="max-height: 25px;">
         <a href="overview.html" class="tablinks">Overview</a>
         <a href="deposits_and_transactions.html" class="tablinks active">Deposits and Transactions</a>
         <a href="budgeting.html" class="tablinks">Budgeting</a>
     </div>
 
     <div class="section no-border centered-section">
-        <h2>Select a date:</h2>
+        <h2>Select a Date:</h2>
         <!-- Input for date selection -->
         <input type="date" id="datePicker">
         <!-- Button to trigger date display -->
-        <button onclick="displayDate()">Submit</button>
+        <button class="blue-button" class="blue-button"class="blue-button" onclick="displayDate()">Submit</button>
         <!-- Paragraph to display the selected date -->
         <p id="selectedDate"></p>
     </div>
@@ -30,7 +62,7 @@
         <h2>Enter Deposit:</h2>
         <label for="depositAmount">Amount:</label>
         <input type="text" id="depositAmount" placeholder="Enter deposit amount">
-        <button onclick="storeDeposit()">Add Deposit</button>
+        <button class="blue-button" class="blue-button" onclick="storeDeposit()">Add Deposit</button>
         
         <h3>Deposits:</h3>
         <table border="1" id="depositTable">
@@ -62,7 +94,7 @@
             <label for="otherCategory">Specify the category:</label>
             <input type="text" id="otherCategory">
         </div>
-        <button onclick="storeTransaction()">Add Transaction</button>
+        <button class="blue-button" class="blue-button" onclick="storeTransaction()">Add Transaction</button>
         
         <h3>Transactions:</h3>
         <table border="1" id="transactionTable">
