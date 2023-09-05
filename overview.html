@@ -7,46 +7,38 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Import Roboto font styles */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+        /* Apply Roboto font to body */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            font-size: 15px;
         }
-        .tab {
-            background-color: #1E2F97;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
+
+        /* Font size for tabs */
         .tablinks {
-            padding: 10px 15px;
-            color: white;
-            text-decoration: none;
-            margin-left: 10px;
-            transition: background-color 0.3s;
+            font-size: 16px;
         }
-        .tablinks.active {
-            background-color: #0a1127;
-            color: #fff;
-            transform: translateY(-1px);
-        }
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+
         .line-chart-container {
-            width: 90%; /* Adjust the width as needed */
+            width: 90%;
             margin: 0 auto;
             padding: 20px;
+        }
+
+        /* Center-align text in the .content class */
+        .content {
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
 <div class="tab">
-    <img src="stability.jpg" alt="Stability Logo" id="topRightImage">
+    <img src="stability.jpg" alt="Stability Logo" id="topRightImage" style="max-height: 25px;">
     <a href="overview.html" class="tablinks active">Overview</a>
     <a href="deposits_and_transactions.html" class="tablinks">Deposits and Transactions</a>
     <a href="budgeting.html" class="tablinks">Budgeting</a>
@@ -63,8 +55,8 @@
 
 <script>
 // Sample data for the line chart
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const amounts = [500, 800, 600, 1000, 1200, 900, 1100];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const amounts = [500, 800, 600, 1000, 1200, 900, 1100, 1200, 1000, 800, 500, 530];
 
 // Create a line chart using Chart.js
 const lineChart = new Chart(document.getElementById('lineChart'), {
